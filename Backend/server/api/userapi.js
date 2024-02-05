@@ -1,5 +1,5 @@
 const Router = require('express').Router();
-
+const Decryptor = require('../utils/decryptor');
 const Validation = require('../helpers/validationHelper');
 const UserHelper = require('../helpers/userHelper');
 const GeneralHelper = require('../helpers/generalHelper');
@@ -67,8 +67,9 @@ const restoreUser = async (request, reply) => {
 
 const login = async (request, reply) => {
     try {
-        Validation.loginValidation(request.body);
-        const { user_email, user_password } = request.body;
+        const decryptedData = Decryptor.decryptObject(request.body);
+        Validation.loginValidation(decryptedData);
+        const { user_email, user_password } = decryptedData;
         const response = await UserHelper.login({ user_email, user_password });
         return reply.send(response);
     } catch (err) {

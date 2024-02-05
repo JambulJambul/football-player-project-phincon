@@ -17,6 +17,16 @@
   }
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+  border: none;
+}
+
 body {
   margin: 0;
   background-color: var(--color-bg-secondary);
@@ -29,4 +39,46 @@ html[data-theme='light'] {
 
 html[data-theme='dark'] {
   @include dark-theme;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+label,
+button,
+select,
+summary,
+[type=radio],
+[type=submit],
+[type=checkbox] {
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
 }

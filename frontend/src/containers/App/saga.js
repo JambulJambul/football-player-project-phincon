@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 
-// import { ping } from '@domain/api';
+import { ping } from '@domain/api';
 import { showPopup, setLoading } from '@containers/App/actions';
 import { PING } from '@containers/App/constants';
 

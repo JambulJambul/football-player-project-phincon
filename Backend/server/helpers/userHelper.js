@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const CheckerUtil = require('../utils/checkerUtil')
 const authMiddleware = require('../middlewares/authMiddleware')
 const Moment = require('moment');
+const Boom = require ('boom');
 
 
 const getAllUsers = async () => {
@@ -140,14 +141,12 @@ const login = async (dataObject) => {
         })
         if (_.isEmpty(users)) {
             const message = "No user found in the database.";
-            const res = { message };
-            return Promise.resolve(res);
+            return Promise.reject(Boom.badRequest(message));
         }
         const passwordCheck = await bcrypt.compare(user_password, users.user_password);
         if (passwordCheck == false) {
             const message = "Incorrect password";
-            const res = { message };
-            return Promise.resolve(res);
+            return Promise.reject(Boom.badRequest(message));
         }
         const token = authMiddleware.generateToken({
             user_id: users.user_id,

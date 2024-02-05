@@ -4,8 +4,9 @@ import { merge } from 'lodash';
 import request from '@utils/request';
 
 const urls = {
-  // ping: 'ping.json',
-  register: 'user/register'
+  ping: 'ping.json',
+  register: 'user/register',
+  login: 'users/login'
 };
 
 export const callAPI = async (endpoint, method, header = {}, params = {}, data = {}) => {
@@ -28,7 +29,7 @@ export const callAPI = async (endpoint, method, header = {}, params = {}, data =
   });
 };
 
-// export const ping = () => callAPI(urls.ping, 'get');
+export const ping = () => callAPI(urls.ping, 'get');
 
 export const fetchPokemon = () => callAPI(urls.ditto, 'GET');
 export const example = () => {
@@ -39,6 +40,9 @@ export const example = () => {
 };
 
 export const register = (dataUser) => {
-  console.log(dataUser, '<<< DATA USER API')
   return callAPI(urls.register, 'POST', {}, {}, dataUser);
+}
+
+export const login = (dataUser) => {
+  return callAPI(urls.login, 'POST', {}, {}, dataUser)
 }
