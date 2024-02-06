@@ -1,8 +1,8 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { setLoading } from '@containers/App/actions';
-import { login } from '@domain/api';
+import { login, personalDetails } from '@domain/api';
 import { DO_LOGIN } from './constants';
-import { setLogin, setToken } from '@containers/Client/actions';
+import { setLogin, setToken, setUserDetails } from '@containers/Client/actions';
 
 function* doLogin({ postData, cbSuccess, cbFailed }) {
     yield put(setLoading(true));
@@ -10,6 +10,8 @@ function* doLogin({ postData, cbSuccess, cbFailed }) {
         const response = yield call(login, postData)
         yield put(setLogin(true));
         yield put(setToken(response.token));
+        const userDetailsResponse = yield call(personalDetails, response.token);
+        yield put(setUserDetails(userDetailsResponse?.users))
         cbSuccess && cbSuccess();
     } catch (error) {
         cbFailed && cbFailed(error?.response?.data?.message)

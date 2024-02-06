@@ -1,4 +1,4 @@
-import { SET_LOGIN, SET_TOKEN } from '@containers/Client/constants';
+import { SET_LOGIN, SET_TOKEN, SET_USER_DETAILS } from '@containers/Client/constants';
 
 export const setLogin = (login) => {
   console.log(login)
@@ -11,4 +11,9 @@ export const setLogin = (login) => {
 export const setToken = (token) => ({
   type: SET_TOKEN,
   token,
+});
+
+export const setUserDetails = (userDetails) => ({
+  type: SET_USER_DETAILS,
+  userDetails,
 });

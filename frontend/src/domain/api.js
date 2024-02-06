@@ -6,7 +6,8 @@ import request from '@utils/request';
 const urls = {
   ping: 'ping.json',
   register: 'users/create-user',
-  login: 'users/login'
+  login: 'users/login',
+  personalDetails: 'users/personal-profile'
 };
 
 export const callAPI = async (endpoint, method, header = {}, params = {}, data = {}) => {
@@ -45,4 +46,8 @@ export const register = (dataUser) => {
 
 export const login = (dataUser) => {
   return callAPI(urls.login, 'POST', {}, {}, dataUser)
+}
+
+export const personalDetails = (token) => {
+  return callAPI(urls.personalDetails, 'GET', {}, { Authorization: `Bearer ${token}` })
 }
