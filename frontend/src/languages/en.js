@@ -13,5 +13,9 @@ export default {
   login_to_register: "Don't have an account?",
   register_now: "Register now!",
   login_to_forgot_password: "Forgot Your Password?",
-
+  register:"Register",
+  register_title:"Create your account",
+  register_to_login: "Already have an account?",
+  login_here: "Login here!",
+  name:"Name"
 };

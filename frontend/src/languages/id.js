@@ -13,4 +13,9 @@ export default {
   login_to_register: "Belum memiliki akun?",
   register_now: "Daftar sekarang!",
   login_to_forgot_password: "Lupa password anda?",
+  register:"Daftar",
+  register_title:"Buat akun anda",
+  register_to_login: "Sudah Memiliki Akun?",
+  login_here: "Login disini!",
+  name:"Nama"
 };

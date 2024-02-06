@@ -67,13 +67,13 @@ const userDetailValidation = (data) => {
 
 const createUserValidation = (data) => {
   const schema = Joi.object({
-    user_name: Joi.string().alphanum().min(3).max(30).required().description('User Name; i.e. John Doe'),
+    user_name: Joi.string().regex(/^[a-zA-Z\s]{3,30}$/).min(3).max(30).required().description('User Name; i.e. John Doe'),
     user_email: Joi.string().email().required().description('User Email; i.e. johndoe@gmail.com'),
     user_password: Joi.string().min(6).required().description('User Password; i.e. AasfIH124F'),
   });
 
   if (schema.validate(data).error) {
-    throw Boom.badRequest(schema.validate(data).error);
+    throw Boom.unauthorized(schema.validate(data).error);
   }
 };
 

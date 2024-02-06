@@ -1,7 +1,7 @@
-import { SET_LOGIN } from "./constants";
+import { DO_LOGIN } from "./constants";
 
-export const setLogin = (postData, cbSuccess, cbFailed) => ({
-    type: SET_LOGIN,
+export const doLogin = (postData, cbSuccess, cbFailed) => ({
+    type: DO_LOGIN,
     postData,
     cbSuccess,
     cbFailed

@@ -1,18 +1,18 @@
 import { FormattedMessage } from 'react-intl';
 import { useForm } from "react-hook-form";
-import { doLogin } from './actions'
+import { doRegister } from './actions'
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import encryptPayload from '@utils/encryptionHelper';
 
 import classes from './style.module.scss'
 
-const Login = () => {
+const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const {
     register,
     handleSubmit,
@@ -23,25 +23,27 @@ const Login = () => {
     resolve => setTimeout(resolve, ms)
   );
 
-  const notifyError = (message) => toast.error(message, {
+  const notifySuccess = (message) => toast.success(message, {
     position: 'bottom-right'
   });
 
-  const notifySuccess = (message) => toast.success(message, {
+  const notifyError = (message) => toast.error(message, {
     position: 'bottom-right'
   });
 
   const onSubmit = async (data) => {
     try {
       const encryptedData = encryptPayload(data);
-      dispatch(doLogin({ encryptedData }, async () => {
-        notifySuccess("Login Successful");
-        await delay(1500);
-        navigate('/');
-      }, (error) => {
-        console.log(error)
-        notifyError(error || "An error occurred");
-      }))
+      dispatch(doRegister({ encryptedData },
+        async () =>  {
+          notifySuccess("Account created");
+          await delay(3000);
+          navigate('/login');
+        },
+        (error) => {
+          console.log(error)
+          notifyError(error || "An error occurred");
+        }))
     } catch (error) {
       console.error(error);
     }
@@ -52,23 +54,21 @@ const Login = () => {
       <div className={classes["login-page-wrapper"]}>
         <div className={classes["login-box-container"]}>
           <h3>
-            <FormattedMessage id='login_title' />
+            <FormattedMessage id='register_title' />
           </h3>
           <form onSubmit={handleSubmit(onSubmit)} className={classes["login-form-container"]}>
             <label htmlFor='email'>Email:</label><br />
             <input type='email' id='email' name='email' required {...register("user_email")} /><br />
             <label htmlFor='password'>Password:</label><br />
             <input type='password' id='password' name='password' required  {...register("user_password")} /><br />
-            <button type='submit'>Login</button>
+            <label htmlFor='name'><FormattedMessage id='name' />:</label><br />
+            <input type='name' id='name' name='name' required  {...register("user_name")} /><br />
+            <button type='submit'><FormattedMessage id='register' /></button>
             <Toaster />
           </form>
           <p className={classes["register-text"]}>
-            <FormattedMessage id='login_to_register' />&nbsp;
-            <Link to="/register"><FormattedMessage id='register_now' /></Link>
-          </p>
-          <p className={classes["register-text"]}>
-            <FormattedMessage id='login_to_forgot_password' />&nbsp;
-            <Link to="/register"><FormattedMessage id='click_here' /></Link>
+            <FormattedMessage id='register_to_login' />&nbsp;
+            <Link to="/login"><FormattedMessage id='login_here' /></Link>
           </p>
         </div>
       </div>
@@ -76,4 +76,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register

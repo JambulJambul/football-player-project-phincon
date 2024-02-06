@@ -5,7 +5,7 @@ import request from '@utils/request';
 
 const urls = {
   ping: 'ping.json',
-  register: 'user/register',
+  register: 'users/create-user',
   login: 'users/login'
 };
 

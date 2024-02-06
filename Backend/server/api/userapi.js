@@ -31,8 +31,9 @@ const getUserDetails = async (request, reply) => {
 
 const createUser = async (request, reply) => {
     try {
-        Validation.createUserValidation(request.body);
-        const { user_name, user_email, user_password } = request.body;
+        const decryptedData = Decryptor.decryptObject(request.body);
+        Validation.createUserValidation(decryptedData);
+        const { user_name, user_email, user_password } = decryptedData;
         const response = await UserHelper.createUser({ user_name, user_email, user_password });
         return reply.send(response);
     } catch (err) {

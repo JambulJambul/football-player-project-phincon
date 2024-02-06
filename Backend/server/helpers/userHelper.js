@@ -58,12 +58,16 @@ const getUserDetails = async (dataObject) => {
 const createUser = async (dataObject) => {
     const { user_name, user_email, user_password } = dataObject
     try {
+        const isDeleted = await CheckerUtil.isUserDeletedByEmail({ user_email })
+        if (isDeleted == false) {
+            const message = 'Email already exist in the database'
+            return Promise.reject(Boom.badRequest(message));
+        }
         const hashedPassword = await bcrypt.hash(user_password, 10)
         const isAdded = await db.Users.create({ user_name: user_name, user_email: user_email, user_password: hashedPassword })
         if (isAdded == false) {
             const message = 'Operation was unsucessful'
-            const res = { message }
-            return Promise.resolve(res)
+            return Promise.reject(Boom.badRequest(message));
         }
         const message = `The user ${user_name} has been added to the database.`
         const res = { message }
@@ -140,7 +144,7 @@ const login = async (dataObject) => {
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt', 'otp_code', 'otp_exp'] }
         })
         if (_.isEmpty(users)) {
-            const message = "No user found in the database.";
+            const message = "User not found";
             return Promise.reject(Boom.badRequest(message));
         }
         const passwordCheck = await bcrypt.compare(user_password, users.user_password);
