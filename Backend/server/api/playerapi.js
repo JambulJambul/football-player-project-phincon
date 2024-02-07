@@ -125,15 +125,28 @@ const restorePlayer = async (request, reply) => {
     }
 }
 
+const increasePlayerViewCount = async (request, reply) => {
+    try {
+        Validation.playerDetailValidation(request.params);
+        const { player_id } = request.params;
+        const response = await PlayerHelper.increasePlayerViewCount({ player_id });
+        return reply.send(response);
+    } catch (err) {
+        console.log([fileName, 'list', 'ERROR'], { info: `${err}` });
+        return reply.send(GeneralHelper.errorResponse(err));
+    }
+}
+
 Router.get('/list', list);
 Router.get('/details/:player_id', getPlayerDetail)
+Router.get('/club-list', clubList)
 Router.post('/add-player', addNewPlayer)
 Router.post('/add-player-position', addPlayerPosition)
 Router.post('/add-club', addClub)
+Router.post('/restore/:player_id', restorePlayer)
+Router.post('/increase-player-view-count/:player_id', increasePlayerViewCount)
 Router.patch('/edit/:player_id', editPlayer)
 Router.delete('/delete-player/:player_id', deletePlayer)
 Router.delete('/delete-player-position', deletePlayerPosition)
-Router.get('/club-list', clubList)
-Router.post('/restore/:player_id', restorePlayer)
 
 module.exports = Router;

@@ -34,20 +34,23 @@
     .hamburger-icon-wrapper {
       cursor: pointer;
       display: block;
-      @include apply-at-md-size{
+
+      @include apply-at-md-size {
         display: none
       }
     }
 
+
     .toolbar-wrapper {
       display: none;
-      @include apply-at-md-size{
+
+      @include apply-at-md-size {
         display: flex;
       }
     }
 
     .toolbar {
-      @include apply-at-md-size{
+      @include apply-at-md-size {
         @include directionX;
       }
 
@@ -109,4 +112,43 @@
   background-color: var(--color-text);
   ;
   color: $color-white;
+}
+
+.drawer-wrapper {
+  padding: 20px;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .theme {
+    cursor: pointer;
+  }
+
+  .toggle {
+    @include directionX;
+    align-items: center;
+    cursor: pointer;
+
+    .avatar {
+      width: 1.2rem;
+      height: 1.2rem;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      margin-right: 0.5rem;
+    }
+
+    .lang {
+      font-family: Poppins, Arial, Helvetica, sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    .arrow {
+      font-size: 1rem;
+    }
+  }
 }

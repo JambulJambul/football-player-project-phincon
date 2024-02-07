@@ -13,7 +13,10 @@
     background-color: $color-white;
     color: --color-text;
     border-radius: 12px;
-    width: 350px;
+    width: 250px;
+    @include apply-at-sm-size{
+        width: 350px;
+    }
     text-align: center;
 
     .login-form-container {

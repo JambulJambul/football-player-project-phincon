@@ -31,6 +31,11 @@ module.exports = (sequelize, DataTypes) => {
         is_deleted: {
             type: DataTypes.TINYINT,
             defaultValue: 0
+        },
+        player_img_url: DataTypes.STRING,
+        player_view_count: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
         }
     }, {
         sequelize,

@@ -3,7 +3,6 @@ const _ = require('lodash');
 const bcrypt = require('bcrypt')
 const CheckerUtil = require('../utils/checkerUtil')
 const authMiddleware = require('../middlewares/authMiddleware')
-const Moment = require('moment');
 const Boom = require ('boom');
 
 

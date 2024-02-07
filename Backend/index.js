@@ -1,7 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const Boom = require('boom');
-const Sequelize = require('sequelize');
 
 const app = express();
 const Port = process.env.NODEJS_PORT || 3000;

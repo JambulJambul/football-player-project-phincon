@@ -1,11 +1,18 @@
 const db = require('../../models/index')
 const _ = require('lodash');
 const CheckerUtil = require('../utils/checkerUtil')
+const Boom = require('boom');
+const Sequelize = require('sequelize');
+
+
 
 const getAllPlayers = async () => {
     try {
         const players = await db.Players.findAll({
-            attributes: { exclude: ['is_deleted', 'createdAt', 'updatedAt', 'deletedAt'] }
+            attributes: { exclude: ['is_deleted', 'createdAt', 'updatedAt', 'deletedAt'] },
+            order: [
+                ['player_view_count', 'DESC'],
+            ],
         });
         if (_.isEmpty(players)) {
             const message = "No player found in the database.";
@@ -28,7 +35,7 @@ const getPlayerDetails = async (dataObject) => {
         if (isDeleted == true) {
             const message = 'Player doesn\'t exist in the database'
             const res = { message }
-            return Promise.resolve(res)
+            return Promise.reject(Boom.badRequest(res));
         }
         const playerData = await db.Players.findOne({
             where: {
@@ -59,8 +66,11 @@ const getPlayerDetails = async (dataObject) => {
                 club_id: club_id
             }
         })
+        console.log(playerData, "VIEW COUNT")
         const playerDetailObject = {
             playerName: playerData.player_name,
+            playerImgUrl: playerData.player_img_url,
+            playerViewCount: playerData.player_view_count,
             clubName: !_.isEmpty(clubData) ? clubData[0].club_name : "-",
             positions: !_.isEmpty(playerPositions) ? playerPositions : "-"
         }
@@ -99,7 +109,7 @@ const addPlayerPosition = async (dataObject) => {
         if (isDeleted == true) {
             const message = 'Player doesn\'t exist in the database'
             const res = { message }
-            return Promise.resolve(res)
+            return Promise.reject(Boom.badRequest(res));
         }
         const isAdded = await db.PPRelation.create({ player_id: player_id, position_id: position_id });
         if (isAdded == false) {
@@ -141,7 +151,7 @@ const editPlayer = async (dataObject) => {
         if (isDeleted == true) {
             const message = 'Player doesn\'t exist in the database'
             const res = { message }
-            return Promise.resolve(res)
+            return Promise.reject(Boom.badRequest(res));
         }
         let isEdited = false
         let message = ""
@@ -277,7 +287,7 @@ const restorePlayer = async (dataObject) => {
             },
         });
         const message = `Player with the id = ${player_id} has been restored`
-        const res = {message}
+        const res = { message }
         return Promise.resolve(res);
     } catch (error) {
         console.log(error)
@@ -285,6 +295,28 @@ const restorePlayer = async (dataObject) => {
     }
 }
 
+const increasePlayerViewCount = async (dataObject) => {
+    const { player_id } = dataObject
+    try {
+        const isDeleted = await CheckerUtil.isPlayerDeleted({ player_id })
+        if (isDeleted == true) {
+            const message = 'Player doesn\'t exist in the database'
+            const res = { message }
+            return Promise.reject(Boom.badRequest(res));
+        }
+        const playerData = await db.Players.findOne({
+            where: {
+                player_id: player_id,
+            }
+        })
+        await playerData.increment('player_view_count', { by: 1 });
+        const message = `The player with id = ${player_id} view count has been increased.`
+        const res = { message }
+        return Promise.resolve(res)
+    } catch (error) {
+        return Promise.reject(Boom.badRequest(error));
+    }
+}
 
 module.exports = {
     getAllPlayers,
@@ -296,5 +328,6 @@ module.exports = {
     deletePlayer,
     deletePlayerPosition,
     getClubList,
-    restorePlayer
+    restorePlayer,
+    increasePlayerViewCount
 }
