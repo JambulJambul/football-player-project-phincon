@@ -1,0 +1,4 @@
+export const GET_ALL_PLAYERS = 'GET_ALL_PLAYERS'
+export const SET_ALL_PLAYERS = 'SET_ALL_PLAYERS'
+export const GET_ALL_CLUBS = 'GET_ALL_CLUBS'
+export const SET_ALL_CLUBS = 'SET_ALL_CLUBS'

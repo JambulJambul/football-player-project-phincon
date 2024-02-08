@@ -34,8 +34,7 @@ const getPlayerDetails = async (dataObject) => {
         const isDeleted = await CheckerUtil.isPlayerDeleted({ player_id })
         if (isDeleted == true) {
             const message = 'Player doesn\'t exist in the database'
-            const res = { message }
-            return Promise.reject(Boom.badRequest(res));
+            return Promise.reject(Boom.badRequest(message));
         }
         const playerData = await db.Players.findOne({
             where: {
@@ -84,9 +83,9 @@ const getPlayerDetails = async (dataObject) => {
 }
 
 const addNewPlayer = async (dataObject) => {
-    const { player_name, club_id } = dataObject
+    const { player_name, club_id, player_img_url } = dataObject
     try {
-        const isAdded = await db.Players.create({ player_name: player_name, club_id: club_id })
+        const isAdded = await db.Players.create({ player_name: player_name, club_id: club_id, player_img_url: player_img_url })
         console.log(isAdded)
         if (isAdded == undefined) {
             const message = 'Operation was unsucessful'
@@ -108,8 +107,7 @@ const addPlayerPosition = async (dataObject) => {
         const isDeleted = await CheckerUtil.isPlayerDeleted({ player_id })
         if (isDeleted == true) {
             const message = 'Player doesn\'t exist in the database'
-            const res = { message }
-            return Promise.reject(Boom.badRequest(res));
+            return Promise.reject(Boom.badRequest(message));
         }
         const isAdded = await db.PPRelation.create({ player_id: player_id, position_id: position_id });
         if (isAdded == false) {
@@ -127,9 +125,9 @@ const addPlayerPosition = async (dataObject) => {
 }
 
 const addClub = async (dataObject) => {
-    const { club_name, club_location } = dataObject
+    const { club_name, club_location, club_img_url } = dataObject
     try {
-        const isAdded = await db.Club.create({ club_name: club_name, club_location: club_location });
+        const isAdded = await db.Club.create({ club_name: club_name, club_location: club_location, club_img_url: club_img_url });
         if (isAdded == false) {
             const message = 'Operation was unsucessful'
             const res = { message }
@@ -145,14 +143,14 @@ const addClub = async (dataObject) => {
 }
 
 const editPlayer = async (dataObject) => {
-    const { player_id, player_name, club_id } = dataObject
+    const { player_id, player_name, club_id, player_img_url } = dataObject
     try {
         const isDeleted = await CheckerUtil.isPlayerDeleted({ player_id })
         if (isDeleted == true) {
             const message = 'Player doesn\'t exist in the database'
-            const res = { message }
-            return Promise.reject(Boom.badRequest(res));
+            return Promise.reject(Boom.badRequest(message));
         }
+        console.log(player_name, "PLAYERR")
         let isEdited = false
         let message = ""
         if (player_name) {
@@ -183,6 +181,22 @@ const editPlayer = async (dataObject) => {
                 console.log(result)
                 if (result[1] == 1) {
                     message += "Player's club has been updated. "
+                }
+            });
+            isEdited = true
+        }
+        if (player_img_url) {
+            await db.Players.update({
+                player_img_url: player_img_url
+            }, {
+                where: {
+                    player_id: player_id,
+                },
+                returning: true,
+            }).then(function (result) {
+                console.log(result)
+                if (result[1] == 1) {
+                    message += "Player image has been updated. "
                 }
             });
             isEdited = true
@@ -301,8 +315,7 @@ const increasePlayerViewCount = async (dataObject) => {
         const isDeleted = await CheckerUtil.isPlayerDeleted({ player_id })
         if (isDeleted == true) {
             const message = 'Player doesn\'t exist in the database'
-            const res = { message }
-            return Promise.reject(Boom.badRequest(res));
+            return Promise.reject(Boom.badRequest(message));
         }
         const playerData = await db.Players.findOne({
             where: {
@@ -318,6 +331,28 @@ const increasePlayerViewCount = async (dataObject) => {
     }
 }
 
+const getMultipleClubById = async (dataObject) => {
+    const { club_id_array } = dataObject
+    try {
+        const response = await db.Club.findAll({
+            where: {
+                club_id: { [Sequelize.Op.in]: club_id_array }
+            }
+        });
+        if (_.isEmpty(response)) {
+            const message = "No player found in the database.";
+            res = { message };
+            return Promise.resolve(res);
+        }
+        const message = "Get all Clubs successful.";
+        res = { message, response };
+        return Promise.resolve(res);
+    } catch (error) {
+        console.log(error)
+        throw new error
+    }
+}
+
 module.exports = {
     getAllPlayers,
     getPlayerDetails,
@@ -329,5 +364,6 @@ module.exports = {
     deletePlayerPosition,
     getClubList,
     restorePlayer,
-    increasePlayerViewCount
+    increasePlayerViewCount,
+    getMultipleClubById
 }

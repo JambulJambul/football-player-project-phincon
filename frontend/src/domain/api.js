@@ -7,7 +7,10 @@ const urls = {
   ping: 'ping.json',
   register: 'users/create-user',
   login: 'users/login',
-  personalDetails: 'users/personal-profile'
+  personalDetails: 'users/personal-profile',
+  getAllPlayersURL: 'players/list',
+  getAllClubsURL: 'players/club-list',
+  getMultipleClubsURL: 'players/multiple-club'
 };
 
 export const callAPI = async (endpoint, method, header = {}, params = {}, data = {}) => {
@@ -32,7 +35,6 @@ export const callAPI = async (endpoint, method, header = {}, params = {}, data =
 
 export const ping = () => callAPI(urls.ping, 'get');
 
-export const fetchPokemon = () => callAPI(urls.ditto, 'GET');
 export const example = () => {
   const header = {
     'Content-Type': 'multipart/form-data'
@@ -50,4 +52,17 @@ export const login = (dataUser) => {
 
 export const personalDetails = (token) => {
   return callAPI(urls.personalDetails, 'GET', {}, { Authorization: `Bearer ${token}` })
+}
+
+export const getAllPlayersURL = () => {
+  return callAPI(urls.getAllPlayersURL, 'GET')
+}
+
+export const getAllClubsURL = () => {
+  return callAPI(urls.getAllClubsURL, 'GET')
+}
+
+export const getMultipleClubsURL = (club_id_array) => {
+  console.log(club_id_array)
+  return callAPI(urls.getMultipleClubsURL, 'POST', {}, {}, {club_id_array})
 }

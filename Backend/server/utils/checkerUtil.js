@@ -9,6 +9,7 @@ const isPlayerDeleted = async (dataObject) => {
                 player_id: player_id,
             }
         });
+        console.log(playerData)
         if (_.isEmpty(playerData)) {
             return Promise.resolve(true);
         }

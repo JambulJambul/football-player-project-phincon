@@ -1,6 +1,6 @@
 export default {
   app_greeting: 'Hai dari Web!',
-  app_title_header: 'Nice Football',
+  app_title_header: 'Very Nice Football',
   app_not_found: 'Halaman tidak ditemukan',
   app_lang_id: 'Bahasa Indonesia',
   app_lang_en: 'Bahasa Inggris',

@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const Boom = require('boom');
-
+const cors = require('cors')
 const app = express();
 const Port = process.env.NODEJS_PORT || 3000;
 
@@ -14,6 +14,7 @@ dotenv.config();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors()); 
 
 // Handling Invalid Input
 app.use((error, req, res, next) => {

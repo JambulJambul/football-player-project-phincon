@@ -1,1 +1,84 @@
 @import '@styles/base';
+
+.page-container {
+    padding: 25px 50px;
+    @include apply-at-xl-size{
+        padding: 25px 100px;
+    }
+}
+
+.player-card-container {
+   display: block;
+    @include apply-at-sm-size{
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    @include apply-at-xl-size{
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    @include apply-at-xxl-size{
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    gap: 50px;
+}
+
+.player-card-box {
+    padding-top: 5px;
+    margin: 10px 0;
+    @include apply-at-sm-size{
+        margin: 0;
+        padding: 0;
+    }
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 8px;
+    @include apply-at-md-size{
+        display: flex;
+    }
+    cursor: pointer;
+
+    .player-image-box {
+        margin-top: 10px;
+        background-color: lightgray;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px ;
+        margin: 10px;
+        .player-icon {
+            width: 85%;
+            height: 85%;
+            object-fit: cover;
+        }
+    }
+
+    .player-desc-box {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        @include apply-at-md-size{
+            text-align: start;
+            align-items: start;
+        }
+        margin: 0 10px;
+        padding: 10px;
+        .player-club-row {
+            display: flex;
+            align-items: center;
+            p {
+                margin-left: 10px;
+                font-size: 14px;
+            }
+            .club-logo-box{
+                height: 30px;
+                width: 30px;
+            }
+        }
+    }
+}

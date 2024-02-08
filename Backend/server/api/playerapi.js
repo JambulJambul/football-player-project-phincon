@@ -30,9 +30,10 @@ const getPlayerDetail = async (request, reply) => {
 
 const addNewPlayer = async (request, reply) => {
     try {
+        console.log(request.body,"HEREE")
         Validation.addPlayerValidation(request.body);
-        const { player_name, club_id } = request.body;
-        const response = await PlayerHelper.addNewPlayer({ player_name, club_id });
+        const { player_name, club_id, player_img_url } = request.body;
+        const response = await PlayerHelper.addNewPlayer({ player_name, club_id, player_img_url });
         return reply.send(response);
     } catch (err) {
         console.log([fileName, 'list', 'ERROR'], { info: `${err}` });
@@ -55,8 +56,8 @@ const addPlayerPosition = async (request, reply) => {
 const addClub = async (request, reply) => {
     try {
         Validation.addClubValidation(request.body);
-        const { club_name, club_location } = request.body;
-        const response = await PlayerHelper.addClub({ club_name, club_location });
+        const { club_name, club_location, club_img_url } = request.body;
+        const response = await PlayerHelper.addClub({ club_name, club_location, club_img_url });
         return reply.send(response);
     } catch (err) {
         console.log([fileName, 'list', 'ERROR'], { info: `${err}` });
@@ -70,8 +71,8 @@ const editPlayer = async (request, reply) => {
         Validation.playerDetailValidation(request.params)
         Validation.editPlayerBodyValidation(request.body);
         const { player_id } = request.params
-        const { player_name, club_id } = request.body;
-        const response = await PlayerHelper.editPlayer({ player_id, player_name, club_id });
+        const { player_name, club_id, player_img_url } = request.body;
+        const response = await PlayerHelper.editPlayer({ player_id, player_name, club_id, player_img_url });
         return reply.send(response);
     } catch (err) {
         console.log([fileName, 'list', 'ERROR'], { info: `${err}` });
@@ -137,9 +138,23 @@ const increasePlayerViewCount = async (request, reply) => {
     }
 }
 
+const multipleClubById = async (request, reply) => {
+    console.log(request.body,"HERE")
+    try {
+        Validation.multipleClubByIdValidation(request.body);
+        const { club_id_array } = request.body
+        const response = await PlayerHelper.getMultipleClubById({ club_id_array });
+        return reply.send(response);
+    } catch (err) {
+        console.log([fileName, 'list', 'ERROR'], { info: `${err}` });
+        return reply.send(GeneralHelper.errorResponse(err));
+    }
+}
+
 Router.get('/list', list);
 Router.get('/details/:player_id', getPlayerDetail)
 Router.get('/club-list', clubList)
+Router.post('/multiple-club', multipleClubById)
 Router.post('/add-player', addNewPlayer)
 Router.post('/add-player-position', addPlayerPosition)
 Router.post('/add-club', addClub)

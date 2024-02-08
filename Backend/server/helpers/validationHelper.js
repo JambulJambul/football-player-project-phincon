@@ -15,6 +15,7 @@ const addPlayerValidation = (data) => {
   const schema = Joi.object({
     player_name: Joi.string().required().description('Player Name; i.e. Lionel Messi'),
     club_id: Joi.number().required().description('Club Id; i.e. 2'),
+    player_img_url: Joi.string().optional().description('Image Url; i.e. https://google.com'),
   });
 
   if (schema.validate(data).error) {
@@ -37,6 +38,7 @@ const addClubValidation = (data) => {
   const schema = Joi.object({
     club_name: Joi.string().required().description('Club Name; i.e. Liverpool FC'),
     club_location: Joi.string().required().description('Club Location; i.e. Bandung'),
+    club_img_url: Joi.string().optional().description('Image URL; i.e. https://google.com'),    
   });
 
   if (schema.validate(data).error) {
@@ -48,6 +50,7 @@ const editPlayerBodyValidation = (data) => {
   const schema = Joi.object({
     player_name: Joi.string().optional().description('Player Name; i.e. Lionel Messi'),
     club_id: Joi.number().optional().description('Club Id; i.e. 2'),
+    player_img_url: Joi.string().optional().description('Image Url; i.e. https://google.com'),
   });
 
   if (schema.validate(data).error) {
@@ -132,6 +135,16 @@ const forgotPasswordValidation = (data) => {
   }
 };
 
+const multipleClubByIdValidation = (data) => {
+  const schema = Joi.object({
+    club_id_array: Joi.array().items(Joi.number().integer()).description('Array of IDs i.e. [1,2,4]'),
+  });
+
+  if (schema.validate(data).error) {
+    throw Boom.badRequest(schema.validate(data).error);
+  }
+};
+
 module.exports = {
   playerDetailValidation,
   addPlayerValidation,
@@ -144,5 +157,6 @@ module.exports = {
   updateUserNameValidation,
   changePasswordValidation,
   generateOtpValidation,
-  forgotPasswordValidation
+  forgotPasswordValidation,
+  multipleClubByIdValidation
 };

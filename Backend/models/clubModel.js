@@ -23,11 +23,12 @@ module.exports = (sequelize, DataTypes) => {
         },
         club_name: DataTypes.STRING,
         club_location: DataTypes.STRING,
+        club_img_url: DataTypes.STRING
     }, {
         sequelize,
         modelName: 'Club',
         tableName: 'club',
-        timestamps: false
+        paranoid: true
     });
     return Club;
 };
