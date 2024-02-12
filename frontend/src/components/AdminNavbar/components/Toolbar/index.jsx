@@ -13,6 +13,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { setLocale, setTheme } from '@containers/App/actions';
 import classes from '../../style.module.scss'
 import { setLogout } from '@containers/Client/actions';
+import { Divider } from '@mui/material';
 
 const Toolbar = ({ title, locale, theme }) => {
     const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const Toolbar = ({ title, locale, theme }) => {
             <div className={classes["toolbar-wrapper"]}>
                 <List>
                     <ListItem>
-                        <ListItemText primary={`Hi, Admin `+userDetails.user_name} />
+                        <ListItemText primary={`Hi, Admin ` + userDetails.user_name} />
                     </ListItem>
                     <ListItem component={Link} to={'/login'} onClick={handleLogout}>
                         <ListItemText primary="Sign Out" />
@@ -60,57 +61,25 @@ const Toolbar = ({ title, locale, theme }) => {
                         } />
                     </ListItem>
                     <Menu open={open} anchorEl={menuPosition} onClose={handleClose}>
-                    <MenuItem onClick={() => onSelectLang('id')} selected={locale === 'id'}>
-                        <div className={classes.menu}>
-                            <Avatar className={classes.menuAvatar} src="/id.png" />
-                            <div className={classes.menuLang}>
-                                <FormattedMessage id="app_lang_id" />
+                        <MenuItem onClick={() => onSelectLang('id')} selected={locale === 'id'}>
+                            <div className={classes.menu}>
+                                <Avatar className={classes.menuAvatar} src="/id.png" />
+                                <div className={classes.menuLang}>
+                                    <FormattedMessage id="app_lang_id" />
+                                </div>
                             </div>
-                        </div>
-                    </MenuItem>
-                    <MenuItem onClick={() => onSelectLang('en')} selected={locale === 'en'}>
-                        <div className={classes.menu}>
-                            <Avatar className={classes.menuAvatar} src="/en.png" />
-                            <div className={classes.menuLang}>
-                                <FormattedMessage id="app_lang_en" />
+                        </MenuItem>
+                        <MenuItem onClick={() => onSelectLang('en')} selected={locale === 'en'}>
+                            <div className={classes.menu}>
+                                <Avatar className={classes.menuAvatar} src="/en.png" />
+                                <div className={classes.menuLang}>
+                                    <FormattedMessage id="app_lang_en" />
+                                </div>
                             </div>
-                        </div>
-                    </MenuItem>
-                </Menu>
+                        </MenuItem>
+                    </Menu>
                 </List>
-                {/* <div className={classes.toolbar}>
-                    <div>
-                        <p>Hi, Admin {userDetails.user_name}</p>
-                    </div>
-                    <Link onClick={handleLogout} to={'/login'}>
-                        <button className={classes["button"]}>
-                            Sign Out
-                        </button>
-                    </Link>
-                    <div className={classes.toggle} onClick={handleClick}>
-                        <Avatar className={classes.avatar} src={locale === 'id' ? '/id.png' : '/en.png'} />
-                        <div className={classes.lang}>{locale}</div>
-                        <ExpandMoreIcon />
-                    </div>
-                </div>
-                <Menu open={open} anchorEl={menuPosition} onClose={handleClose}>
-                    <MenuItem onClick={() => onSelectLang('id')} selected={locale === 'id'}>
-                        <div className={classes.menu}>
-                            <Avatar className={classes.menuAvatar} src="/id.png" />
-                            <div className={classes.menuLang}>
-                                <FormattedMessage id="app_lang_id" />
-                            </div>
-                        </div>
-                    </MenuItem>
-                    <MenuItem onClick={() => onSelectLang('en')} selected={locale === 'en'}>
-                        <div className={classes.menu}>
-                            <Avatar className={classes.menuAvatar} src="/en.png" />
-                            <div className={classes.menuLang}>
-                                <FormattedMessage id="app_lang_en" />
-                            </div>
-                        </div>
-                    </MenuItem>
-                </Menu> */}
+                <Divider />
             </div>
         </>
     )

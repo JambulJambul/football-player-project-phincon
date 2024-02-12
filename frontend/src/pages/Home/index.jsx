@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllPlayers, getAllClubs } from './actions';
+import { getAllPlayers, getSelectedClubs } from './actions';
 import classes from './style.module.scss'
 import PlayerCard from './components/PlayerCard';
 
@@ -16,7 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     if (club_id_array && club_id_array.length > 0) {
-      dispatch(getAllClubs(club_id_array));
+      dispatch(getSelectedClubs(club_id_array));
     }
   }, [playerList]);
   playerList?.players?.forEach((player) => {

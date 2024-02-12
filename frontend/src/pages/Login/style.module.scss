@@ -14,9 +14,11 @@
     color: --color-text;
     border-radius: 12px;
     width: 250px;
-    @include apply-at-sm-size{
+
+    @include apply-at-sm-size {
         width: 350px;
     }
+
     text-align: center;
 
     .login-form-container {
@@ -59,3 +61,4 @@
         text-decoration: underline;
     }
 }
+

@@ -1,4 +1,4 @@
-import { GET_ALL_PLAYERS, SET_ALL_PLAYERS, GET_ALL_CLUBS, SET_ALL_CLUBS } from "./constants";
+import { GET_ALL_PLAYERS, SET_ALL_PLAYERS, GET_SELECTED_CLUBS, SET_SELECTED_CLUBS } from "./constants";
 
 export const getAllPlayers = (cbSuccess, cbFailed) => ({
     type: GET_ALL_PLAYERS,
@@ -11,14 +11,14 @@ export const setAllPlayers = (playerList) => ({
     playerList
 })
 
-export const getAllClubs = (club_id_array, cbSuccess, cbFailed) => ({
-    type: GET_ALL_CLUBS,
+export const getSelectedClubs = (club_id_array, cbSuccess, cbFailed) => ({
+    type: GET_SELECTED_CLUBS,
     club_id_array,
     cbSuccess,
     cbFailed
 })
 
-export const setAllClubs = (clubList) => ({
-    type: SET_ALL_CLUBS,
+export const setSelectedClubs = (clubList) => ({
+    type: SET_SELECTED_CLUBS,
     clubList
 })

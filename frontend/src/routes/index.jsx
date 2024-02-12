@@ -6,6 +6,8 @@ import Login from '@pages/Login';
 import Register from '@pages/Register';
 import NotFound from '@pages/NotFound';
 import AdminHome from '@pages/AdminHome';
+import CreatePlayer from '@pages/CreatePlayer';
+import PlayerList from '@pages/PlayerList';
 
 const routes = [
   {
@@ -34,6 +36,22 @@ const routes = [
     name: 'Admin Home',
     protected: true,
     component: AdminHome,
+    layout: AdminLayout,
+    isAdmin: true
+  },
+  {
+    path: '/admin/create-player',
+    name: 'Create Player',
+    protected: true,
+    component: CreatePlayer,
+    layout: AdminLayout,
+    isAdmin: true
+  },
+  {
+    path: '/admin/player-list',
+    name: 'Player List',
+    protected: true,
+    component: PlayerList,
     layout: AdminLayout,
     isAdmin: true
   },

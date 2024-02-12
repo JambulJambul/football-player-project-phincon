@@ -1,0 +1,42 @@
+@import '@styles/base';
+
+.page-container {
+    padding: 25px 75px;
+
+    @include apply-at-xl-size {
+        padding: 25px 100px;
+    }
+}
+
+button {
+    margin: 20px 0px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: $color-dark-blue;
+    color: $color-white;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.action-column {
+    display: flex;
+    justify-content: space-around;
+
+    .table-button {
+        cursor: pointer;
+    }
+}

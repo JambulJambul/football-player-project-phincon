@@ -1,8 +1,8 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { setLoading } from '@containers/App/actions';
 import { getAllPlayersURL, getMultipleClubsURL } from '@domain/api';
-import { GET_ALL_PLAYERS, GET_ALL_CLUBS } from './constants';
-import { setAllPlayers, setAllClubs } from './actions';
+import { GET_ALL_PLAYERS, GET_SELECTED_CLUBS } from './constants';
+import { setAllPlayers, setSelectedClubs } from './actions';
 
 function* getAllPlayers({ cbSuccess, cbFailed }) {
     yield put(setLoading(true));
@@ -16,11 +16,11 @@ function* getAllPlayers({ cbSuccess, cbFailed }) {
     yield put(setLoading(false));
 }
 
-function* getAllClubs({ club_id_array, cbSuccess, cbFailed }) {
+function* getSelectedClubs({ club_id_array, cbSuccess, cbFailed }) {
     yield put(setLoading(true));
     try {
         const response = yield call(getMultipleClubsURL, club_id_array)
-        yield put(setAllClubs(response))
+        yield put(setSelectedClubs(response))
         cbSuccess && cbSuccess("Success get all clubs");
     } catch (error) {
         cbFailed && cbFailed(error)
@@ -30,5 +30,5 @@ function* getAllClubs({ club_id_array, cbSuccess, cbFailed }) {
 
 export default function* homeSaga() {
     yield takeLatest(GET_ALL_PLAYERS, getAllPlayers);
-    yield takeLatest(GET_ALL_CLUBS, getAllClubs);
+    yield takeLatest(GET_SELECTED_CLUBS, getSelectedClubs);
 }

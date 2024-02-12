@@ -1,10 +1,11 @@
 import classes from './style.module.scss'
-
 const AdminHome = () => {
     return (
         <>
             <div className={classes['page-container']}>
-                asfasfiasfnioas
+                <h3>
+                    Admin Dashboard
+                </h3>
             </div>
         </>
     )

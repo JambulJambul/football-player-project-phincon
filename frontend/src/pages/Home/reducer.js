@@ -1,6 +1,6 @@
 import { produce } from 'immer';
 
-import { SET_ALL_PLAYERS, SET_ALL_CLUBS } from './constants';
+import { SET_ALL_PLAYERS, SET_SELECTED_CLUBS } from './constants';
 
 export const initialState = {
   playerList: null,
@@ -15,7 +15,7 @@ const homeReducer = (state = initialState, action) =>
       case SET_ALL_PLAYERS:
         draft.playerList = action.playerList;
         break;
-      case SET_ALL_CLUBS:
+      case SET_SELECTED_CLUBS:
         draft.clubList = action.clubList;
         break;
     }
