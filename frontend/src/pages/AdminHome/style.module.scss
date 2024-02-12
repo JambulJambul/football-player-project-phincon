@@ -1,0 +1,8 @@
+@import '@styles/base';
+
+.page-container {
+    padding: 25px 50px;
+    @include apply-at-xl-size{
+        padding: 25px 100px;
+    }
+}

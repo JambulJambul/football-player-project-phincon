@@ -63,6 +63,5 @@ export const getAllClubsURL = () => {
 }
 
 export const getMultipleClubsURL = (club_id_array) => {
-  console.log(club_id_array)
   return callAPI(urls.getMultipleClubsURL, 'POST', {}, {}, {club_id_array})
 }

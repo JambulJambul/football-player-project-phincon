@@ -2,7 +2,7 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import { setLoading } from '@containers/App/actions';
 import { login, personalDetails } from '@domain/api';
 import { DO_LOGIN } from './constants';
-import { setLogin, setToken, setUserDetails } from '@containers/Client/actions';
+import { setLogin, setToken, setUserDetails, setIsAdmin } from '@containers/Client/actions';
 
 function* doLogin({ postData, cbSuccess, cbFailed }) {
     yield put(setLoading(true));
@@ -12,6 +12,11 @@ function* doLogin({ postData, cbSuccess, cbFailed }) {
         yield put(setToken(response.token));
         const userDetailsResponse = yield call(personalDetails, response.token);
         yield put(setUserDetails(userDetailsResponse?.users))
+        if (userDetailsResponse?.users?.user_role == 'admin') {
+            yield put(setIsAdmin(true))
+        } else {
+            yield put(setIsAdmin(false))
+        }
         cbSuccess && cbSuccess();
     } catch (error) {
         cbFailed && cbFailed(error?.response?.data?.message)

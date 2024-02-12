@@ -65,7 +65,6 @@ const getPlayerDetails = async (dataObject) => {
                 club_id: club_id
             }
         })
-        console.log(playerData, "VIEW COUNT")
         const playerDetailObject = {
             playerName: playerData.player_name,
             playerImgUrl: playerData.player_img_url,
@@ -86,7 +85,6 @@ const addNewPlayer = async (dataObject) => {
     const { player_name, club_id, player_img_url } = dataObject
     try {
         const isAdded = await db.Players.create({ player_name: player_name, club_id: club_id, player_img_url: player_img_url })
-        console.log(isAdded)
         if (isAdded == undefined) {
             const message = 'Operation was unsucessful'
             const res = { message }
@@ -150,7 +148,6 @@ const editPlayer = async (dataObject) => {
             const message = 'Player doesn\'t exist in the database'
             return Promise.reject(Boom.badRequest(message));
         }
-        console.log(player_name, "PLAYERR")
         let isEdited = false
         let message = ""
         if (player_name) {
@@ -230,7 +227,6 @@ const deletePlayer = async (dataObject) => {
                 player_id: player_id
             }
         })
-        console.log(isEdited)
         if (isEdited == false) {
             const message = 'Operation was unsucessful'
             const res = { message }

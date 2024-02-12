@@ -25,8 +25,6 @@ const Home = () => {
     }
   });
 
-  console.log(clubList?.response.find(club => club.club_id == 4))
-  console.log(playerList?.players[1]?.club_id)
   
   return (
     <>

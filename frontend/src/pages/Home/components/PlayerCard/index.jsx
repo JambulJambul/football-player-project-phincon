@@ -5,7 +5,6 @@ import { Shield } from '@mui/icons-material';
 const PlayerCard = ({ playerData, clubData }) => {
     const { player_name, player_img_url } = playerData;
     const { club_name, club_img_url,  } = clubData;
-    console.log(club_name,"CLUB NAME")
 
     return (
         <>

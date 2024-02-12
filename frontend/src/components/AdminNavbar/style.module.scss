@@ -12,14 +12,17 @@
     color: var(--color-text);
     padding: 1rem;
     align-items: center;
-    justify-content: space-between;
+    justify-content: start;
+    @include apply-at-md-size{
+      justify-content: space-between;
+    }
     font-size: 1rem;
 
     .logoImage {
       @include directionX;
       cursor: pointer;
       align-items: center;
-
+      margin-left: 15px;
       .logo {
         width: 1.5rem;
         height: 1.5rem;
@@ -52,9 +55,8 @@
 
     .toolbar-wrapper {
       display: none;
-
       @include apply-at-md-size {
-        display: flex;
+        display: none;
       }
     }
 
@@ -62,7 +64,6 @@
       @include apply-at-md-size {
         @include directionX;
       }
-
       .theme {
         @include directionX;
         align-items: center;
@@ -94,6 +95,21 @@
         }
       }
     }
+  }
+
+  .admin-message {
+    display: none;
+    @include apply-at-md-size {
+      display: block;
+    }
+  }
+}
+
+.language-list{
+  @include directionX;
+  align-items: center;
+  .lang{
+    margin-left: 10px
   }
 }
 
@@ -160,4 +176,6 @@
       font-size: 1rem;
     }
   }
+
+ 
 }

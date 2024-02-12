@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import routes from '@routes/index';
 
 import Client from '@containers/Client';
+import AdminClient from '@containers/Admin';
 
 const ClientRoutes = () => {
   const getRoutes = () => {
@@ -18,8 +19,14 @@ const ClientRoutes = () => {
           </Layout>
         );
       }
-
-      return Protected ? <Client>{element}</Client> : element;
+      if (Protected) {
+        return IsAdmin ? (
+          <AdminClient>{element}</AdminClient>
+        ) : (
+          <Client>{element}</Client>
+        );
+      }
+      return element;
     };
 
     routes.forEach((route) => {
