@@ -27,7 +27,7 @@ const PlayerList = () => {
             club_id_array.push(player.club_id);
         }
     });
-    
+
     return (
         <>
             <div className={classes["page-container"]}>
@@ -49,22 +49,25 @@ const PlayerList = () => {
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>25</td>
-                            <td>Forward</td>
-                            <td>12</td>
-                            <td className={classes["action-column"]}>
-                                <div className={classes["table-button"]}>
-                                    <CreateIcon />
-                                </div>
-                                <div className={classes["table-button"]}>
-                                    <DeleteIcon />
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
+                    {playerList && clubList && playerList?.players?.map((player) => (
+                        <>
+                            <tbody>
+                                <tr>
+                                    <td>{player.player_name}</td>
+                                    <td>{clubList?.response.find(club => club.club_id === parseInt(player.club_id)).club_name}</td>
+                                    <td>Forward</td>
+                                    <td>{player.player_view_count}</td>
+                                    <td className={classes["action-column"]}>
+                                        <div className={classes["table-button"]}>
+                                            <CreateIcon />
+                                        </div>
+                                        <div className={classes["table-button"]}>
+                                            <DeleteIcon />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody></>))
+                    }
                 </table>
             </div>
         </>

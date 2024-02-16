@@ -25,13 +25,14 @@ const Home = () => {
     }
   });
 
-  
+
   return (
     <>
       <div className={classes["page-container"]}>
         <div className={classes["player-card-container"]}>
           {playerList && clubList && playerList?.players?.map((player) => (
-            <PlayerCard key={player.player_id} playerData={player} clubData={clubList?.response.find(club => club.club_id === parseInt(player.club_id) )} />))}
+            <PlayerCard key={player.player_id} playerData={player} clubData={clubList?.response.find(club => club.club_id === parseInt(player.club_id))} />))
+          }
         </div>
       </div>
     </>

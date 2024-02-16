@@ -1,0 +1,609 @@
+{
+	"info": {
+		"_postman_id": "79d8189e-8f5b-4999-86b7-86b9ca171bc5",
+		"name": "Football Player Week 4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21450236"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "[GET] Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] Get User Details by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/details/6",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"details",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] Get Personal Profile (Authenticated)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNiwidXNlcl9uYW1lIjoiSGlsbWFuIE51cmZhaG1pIiwidXNlcl9yb2xlIjoicHVibGljIiwiaWF0IjoxNzA3MjAxOTI0LCJleHAiOjE3MDcyODgzMjR9.30jw4L0mNla2CLTM7YJwLmMMKrTOjinNWr6b2x2Uwgo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/users/personal-profile",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"personal-profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_name\": \"Hilman Nurfahmi\",\r\n    \"user_email\": \"hilman@gmail.com\",\r\n    \"user_password\": \"test123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/users/create-user",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"create-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] Restore User by Id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/restore/6",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"restore",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] User Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_email\": \"gigih@gmail.com\",\r\n    \"user_password\": \"test123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] Get Otp for Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_email\":\"gigih@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/users/get-otp",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"get-otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_email\":\"gigih@gmail.com\",\r\n    \"user_password\":\"test123456\",\r\n    \"otp_code\":\"221424\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/users/forgot-password",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[PATCH] Update Profile (Authenticated)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VyX25hbWUiOiJHaWdpaCIsInVzZXJfcm9sZSI6InB1YmxpYyIsImlhdCI6MTcwNjg3NjY5NSwiZXhwIjoxNzA2OTYzMDk1fQ.7lLpkbS6RElCiELi6gwcI-mql9PL47UtnxP6z7ArFME",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_name\":\"Gigih Dharmawan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/users/update-profile",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"update-profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[PATCH] Change Password (Authenticated)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VyX25hbWUiOiJHaWdpaCIsInVzZXJfcm9sZSI6InB1YmxpYyIsImlhdCI6MTcwNjg3NjY5NSwiZXhwIjoxNzA2OTYzMDk1fQ.7lLpkbS6RElCiELi6gwcI-mql9PL47UtnxP6z7ArFME",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_password\":\"test1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/users/change-password",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[DEL] Delete User By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/delete/6",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"delete",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Players",
+			"item": [
+				{
+					"name": "[GET] Get All Players",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/players/list",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] Get Player Details by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/players/details/7",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players",
+								"details",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] Get Club List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/players/club-list",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players",
+								"club-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] Add Player",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"player_name\": \"Sadio Mane\",\r\n    \"club_id\": 1,\r\n    \"player_img_url\": \"https://cdn.sofifa.net/players/208/722/24_120.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/players/add-player",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players",
+								"add-player"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] Add Player Position",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"player_id\": 14,\r\n    \"position_id\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/players/add-player-position",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players",
+								"add-player-position"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] Add Club",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"club_name\":\"Arsenal\",\r\n    \"club_location\": \"London, England\",\r\n    \"club_img_url\":\"https://cdn.sofifa.net/meta/team/19/120.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/players/add-club",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players",
+								"add-club"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] Restore Player",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/players/restore/14",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players",
+								"restore",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[PATCH] Edit Player",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"club_id\": 10,\r\n    \"player_name\": \"Maman Lewandowski\",\r\n    \"player_img_url\": \"https://cdn.sofifa.net/players/208/722/24_120.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/players/edit/8",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players",
+								"edit",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[DEL] Delete Player",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/players/delete-player/14",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players",
+								"delete-player",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[DEL] Delete Player Postion",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"position_id\": 2,\r\n    \"player_id\": 14\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/players/delete-player-position",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players",
+								"delete-player-position"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] Increase Player View Count",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/players/increase-player-view-count/7",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players",
+								"increase-player-view-count",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] Multiple Club",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"club_id_array\":[\r\n        1,2,4\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/players/multiple-club",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players",
+								"multiple-club"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
